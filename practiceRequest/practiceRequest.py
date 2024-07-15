@@ -24,6 +24,7 @@ import typing
 # from typing import List, Optional
 
 # request 후 실패했을 때, 로그를 남기기 위해 logging 모듈을 가져옵니다
+# 서브 모듈 handler는 별도로 임포트합니다
 import logging
 from logging import handlers
 
@@ -154,7 +155,7 @@ def process_response(response: requests.Response) -> dict:
 # 3-1. GET 요청하기
 # 3-4. 요청합니다 -> 4. 이동
 response = requests.get(Endpoint.get_full_URL(Endpoint.IP))
-
+print("response.raise_for_status:", response.raise_for_status)
 result = process_response(response)
 if result is not None:
     print("GET RESPONSE:", result)
@@ -207,7 +208,7 @@ else:
     logging.info("Response result is None")
 
 
-# 7. 파라미터를 추가하기
+# 7. 파라미터를 추가하기 -> 8. 이동
 params = {"page": 2, "per_page": 5}
 
 response = requests.get(Endpoint.get_full_URL(Endpoint.USERS), params=params)
@@ -249,3 +250,4 @@ if result is not None:
     """
 else:
     logging.info("Response result is None")
+
